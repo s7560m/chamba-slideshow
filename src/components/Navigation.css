@@ -1,0 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+.nav-button {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 20px;
+    padding: 0 10px 0 10px;
+}

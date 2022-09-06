@@ -1,0 +1,38 @@
+.admin {
+    margin-top: 150px;
+}
+
+.admin-text {
+    width: 35vw;
+    display: inline-block;
+}
+
+.admin-autocomplete {
+    width: 10vw;
+    display: inline-block;
+    position: relative;
+    bottom: 8.8px;
+    left: 10px;
+}
+
+.textfield-container {
+    padding-bottom: 20px;
+}
+
+.virtual-scroll {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-top: 20px;
+}
+
+.icon-button-label {
+    font-size: 20px;
+    font-family: 'Roboto Condensed', sans-serif;
+    padding-left: 10px;
+}
+
+.trash {
+    position: relative;
+    top: 10px;
+    left: 20px;
+}

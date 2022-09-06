@@ -1,0 +1,49 @@
+@keyframes fade-out {
+    0%    {
+        opacity: 1;
+        filter: blur(0px);
+    }
+    80%   {
+        opacity: 1;
+        filter: blur(0px);
+    }
+    100%  {
+        opacity: 0;
+        filter: blur(8px);
+    }
+}
+
+@keyframes fade-in {
+    0%    {
+        opacity: 0;
+        filter: blur(8px);
+    }
+    20%   {
+        opacity: 1;
+        filter: blur(0px);
+    }
+    100%  {
+        opacity: 1;
+        filter: blur(0px);
+    }
+}
+
+.fade-in {
+    animation: fade-in 4s infinite;
+    /*opacity: 0.5;*/
+}
+
+.fade-out {
+    animation: fade-out 4s infinite;
+}
+
+.blur-background {
+    background-image: url("https://img.freepik.com/free-vector/marijuana-cannabis-leaf-background_206725-225.jpg?w=2000");
+}
+/*img {*/
+/*    opacity: 0.5;*/
+/*}*/
+
+/*.blur {*/
+/*    filter: blur(4px);*/
+/*}*/

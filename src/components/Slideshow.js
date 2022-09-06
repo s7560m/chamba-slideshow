@@ -10,9 +10,15 @@ export default function Slideshow({src, items}) {
         IN: "IN"
     }
 
+    const MEDIATYPES = {
+        VIDEO: "VIDEO",
+        IMAGE: "IMAGE"
+    }
+
     const [height, setHeight] = useState(null);
     const [counter, setCounter] = useState(0);
-    const [fadeType, setFadeType] = useState(FADETYPES.OUT);
+    const [fadeType, setFadeType] = useState(null);
+    const [mediaWait, setMediaWait] = useState(4000);
 
     const incrementCounter = () => {
         setCounter(prevState => {
@@ -32,25 +38,48 @@ export default function Slideshow({src, items}) {
         if (fadeType === FADETYPES.IN) return "fade-in";
     }
 
-    useEffect(() => {
-        if (fadeType === FADETYPES.IN) {
+    const imageLoad = () => {
+        // incrementCounter();
+        setTimeout(() => {
+            setFadeType(FADETYPES.IN);
             setTimeout(() => {
                 setFadeType(FADETYPES.OUT);
+                setTimeout(() => incrementCounter(), 4000);
             }, 4000)
-        }
+        })
+    }
 
-        if (fadeType === FADETYPES.OUT) {
-            setTimeout(() => {
-                incrementCounter();
-                setFadeType(FADETYPES.IN);
-            }, 4000)
-        }
-    }, [fadeType])
+    const videoLoad = () => {
+        // console.log("video has loaded");
+        setFadeType(FADETYPES.IN);
+    }
 
-    // use two img tags, fade out of the top one
+    const videoEnded = () => {
+        // console.log("video has ended");
+        setFadeType(FADETYPES.OUT);
+        setTimeout(() => {
+            incrementCounter();
+        }, 4000)
+    }
+
+    // useEffect(() => {console.log(fadeType)}, [fadeType])
+
+    // useEffect(() => {
+    //
+    //     // fade in after 4s, this works for both image and video media
+    //     if (fadeType === FADETYPES.OUT) {
+    //         setTimeout(() => {
+    //             incrementCounter();
+    //             setFadeType(FADETYPES.IN);
+    //         }, 4000)
+    //     }
+    //
+    // }, [fadeType])
+
+    // use a video and img tag
     return (
-        <div className={`${getFadeClass()} blur-background`}>
-            {!items[counter]?.isVideo && <img src={items[counter]?.src} height={height} alt={"alt"}/>}
-            {items[counter]?.isVideo && <video height={height} autoPlay muted onEnded={() => incrementCounter()} src={items[counter]?.src}/>}
+        <div className={`${getFadeClass()} image-video-container`}>
+            {!items[counter]?.isVideo && <img src={items[counter]?.src} onLoad={() => imageLoad()} height={height} alt={"alt"}/>}
+            {items[counter]?.isVideo && <video height={height} autoPlay muted onLoadStart={() => videoLoad()} onEnded={() => videoEnded()} src={items[counter]?.src}/>}
         </div>)
 }

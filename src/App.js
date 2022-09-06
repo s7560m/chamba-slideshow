@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation";
 import {createTheme} from "@mui/material";
 import {ThemeProvider} from "@emotion/react";
 import {useEffect, useState} from "react";
+import Authorization from "./routes/Authorization";
 
 const materialUITheme = createTheme({
     palette: {
@@ -34,6 +35,12 @@ function App() {
       }
   }, [show])
 
+  const getAdminOrAuthorization = () => {
+      const pass = "cannabis"
+      if (auth === pass) return <Admin/>
+      return <Authorization sendAuthToParent={setAuth}/>
+  }
+
   return (
     <div className="App" onMouseMove={() => setShow(true)}>
         <ThemeProvider theme={materialUITheme}>
@@ -41,7 +48,9 @@ function App() {
             <Navigation show={show}/>
             <Routes>
               <Route path="/" element={<Home/>}/>
-              <Route path="/admin" element={<Admin/>}/>
+              <Route path="/admin" element=
+                  {getAdminOrAuthorization()}
+              />
             </Routes>
           </BrowserRouter>
         </ThemeProvider>

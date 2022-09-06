@@ -29,16 +29,19 @@
 }
 
 .fade-in {
-    animation: fade-in 4s infinite;
+    animation: fade-in 4s;
+    opacity: 1;
     /*opacity: 0.5;*/
 }
 
 .fade-out {
-    animation: fade-out 4s infinite;
+    animation: fade-out 4s;
+    opacity: 0;
 }
 
-.blur-background {
+.image-video-container {
     background-image: url("https://img.freepik.com/free-vector/marijuana-cannabis-leaf-background_206725-225.jpg?w=2000");
+    /*opacity: 0;*/
 }
 /*img {*/
 /*    opacity: 0.5;*/

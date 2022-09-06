@@ -29,26 +29,25 @@ export async function getItems() {
 }
 
 // @param id -> an array of ids of which we'll update
-export function updateItems(items) {
-    // console.log(items);
-    items.forEach(async (item) => {
+export async function updateItems(items) {
+
+    return await Promise.all(items.map(item => {
         let docRef;
         // two cases: if there's an id present, we will update the doc
         // if not, it means the doc doesn't exist yet, so we add it
         if (item?.id) {
             docRef = doc(db, 'items', item.id);
-            await updateDoc(docRef, {
+            return updateDoc(docRef, {
                 src: item.src,
                 isVideo: item.isVideo,
             })
-            return;
         }
 
-        await addDoc(collection(db, "items"), {
+        return addDoc(collection(db, "items"), {
             src: item.src,
             isVideo: item.isVideo,
         })
-    })
+    }))
 }
 
 // @param id -> the id of the media we're deleting

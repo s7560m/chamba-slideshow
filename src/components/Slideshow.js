@@ -16,6 +16,7 @@ export default function Slideshow({src, items}) {
     }
 
     const [height, setHeight] = useState(null);
+    const [width, setWidth] = useState(null);
     const [counter, setCounter] = useState(0);
     const [fadeType, setFadeType] = useState(null);
     const [mediaWait, setMediaWait] = useState(4000);
@@ -31,6 +32,7 @@ export default function Slideshow({src, items}) {
     // set image to window height on load
     useEffect(() => {
         setHeight(window.innerHeight);
+        setWidth(window.innerWidth);
     }, [])
 
     const getFadeClass = () => {
@@ -79,7 +81,7 @@ export default function Slideshow({src, items}) {
     // use a video and img tag
     return (
         <div className={`${getFadeClass()} image-video-container`}>
-            {!items[counter]?.isVideo && <img src={items[counter]?.src} onLoad={() => imageLoad()} height={height} alt={"alt"}/>}
-            {items[counter]?.isVideo && <video height={height} autoPlay muted onLoadStart={() => videoLoad()} onEnded={() => videoEnded()} src={items[counter]?.src}/>}
+            {!items[counter]?.isVideo && <img src={items[counter]?.src} onLoad={() => imageLoad()} width={width} height={height} alt={"alt"}/>}
+            {items[counter]?.isVideo && <video height={height} width={width} autoPlay muted onLoadStart={() => videoLoad()} onEnded={() => videoEnded()} src={items[counter]?.src}/>}
         </div>)
 }

@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, deleteDoc, doc, updateDoc, addDoc} from "firebase/firestore";
+import { getFirestore, collection, getDocs, deleteDoc, doc, updateDoc, addDoc, getDoc} from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -53,4 +53,11 @@ export async function updateItems(items) {
 // @param id -> the id of the media we're deleting
 export async function deleteItemByID(id) {
     await deleteDoc(doc(db, "items", id))
+}
+
+export async function getPassword() {
+    const docRef = doc(db, "admin", "auth");
+    const docSnap = await getDoc(docRef);
+
+    return docSnap.get('password');
 }

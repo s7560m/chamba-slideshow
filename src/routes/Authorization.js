@@ -2,6 +2,7 @@ import {useState} from "react";
 import {Button, IconButton, TextField} from "@mui/material";
 import {Check} from "@mui/icons-material";
 import './Authorization.css'
+import {getPassword} from "../api/firebase";
 
 export default function Authorization({sendAuthToParent}) {
     const [pass, setPass] = useState("");

@@ -8,6 +8,7 @@ import {createTheme} from "@mui/material";
 import {ThemeProvider} from "@emotion/react";
 import {useEffect, useState} from "react";
 import Authorization from "./routes/Authorization";
+import {getPassword} from "./api/firebase";
 
 const materialUITheme = createTheme({
     palette: {
@@ -24,6 +25,7 @@ const materialUITheme = createTheme({
 function App() {
 
   const [show, setShow] = useState(true);
+  const [pass, setPass] = useState(null);
   const [auth, setAuth] = useState("")
 
   useEffect(() => {
@@ -35,8 +37,15 @@ function App() {
       }
   }, [show])
 
+  const fetchPass = () => {
+      getPassword().then(response => setPass(response));
+  }
+  // when the app loads, fetch the password and store it in a state obj
+  useEffect(() => {
+      fetchPass();
+  }, [])
+
   const getAdminOrAuthorization = () => {
-      const pass = "cannabis"
       if (auth === pass) return <Admin/>
       return <Authorization sendAuthToParent={setAuth}/>
   }

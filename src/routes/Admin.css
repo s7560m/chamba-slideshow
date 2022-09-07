@@ -20,7 +20,7 @@
 }
 
 .virtual-scroll {
-    max-height: 60vh;
+    max-height: 55vh;
     overflow-y: auto;
     padding-top: 20px;
 }
@@ -35,4 +35,8 @@
     position: relative;
     top: 10px;
     left: 20px;
+}
+
+.invalid-filetype-msg {
+    color: red;
 }

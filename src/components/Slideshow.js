@@ -2,6 +2,7 @@
 // items -> image sources of the items
 import {useEffect, useState} from "react";
 import './Slideshow.css'
+import useWindowSize from "../hooks/useWindowSize";
 
 export default function Slideshow({src, items}) {
 
@@ -10,16 +11,11 @@ export default function Slideshow({src, items}) {
         IN: "IN"
     }
 
-    const MEDIATYPES = {
-        VIDEO: "VIDEO",
-        IMAGE: "IMAGE"
-    }
-
-    const [height, setHeight] = useState(null);
-    const [width, setWidth] = useState(null);
+    // const [height, setHeight] = useState(null);
+    // const [width, setWidth] = useState(null);
     const [counter, setCounter] = useState(0);
     const [fadeType, setFadeType] = useState(null);
-    const [mediaWait, setMediaWait] = useState(4000);
+    const size = useWindowSize();
 
     const incrementCounter = () => {
         setCounter(prevState => {
@@ -30,10 +26,10 @@ export default function Slideshow({src, items}) {
     }
 
     // set image to window height on load
-    useEffect(() => {
-        setHeight(window.innerHeight);
-        setWidth(window.innerWidth);
-    }, [])
+    // useEffect(() => {
+    //     setHeight(window.innerHeight);
+    //     setWidth(window.innerWidth);
+    // }, [])
 
     const getFadeClass = () => {
         if (fadeType === FADETYPES.OUT) return "fade-out";
@@ -80,8 +76,8 @@ export default function Slideshow({src, items}) {
 
     // use a video and img tag
     return (
-        <div className={`${getFadeClass()} image-video-container`}>
-            {!items[counter]?.isVideo && <img src={items[counter]?.src} onLoad={() => imageLoad()} width={width} height={height} alt={"alt"}/>}
-            {items[counter]?.isVideo && <video height={height} width={width} autoPlay muted onLoadStart={() => videoLoad()} onEnded={() => videoEnded()} src={items[counter]?.src}/>}
+        <div className={`${getFadeClass()} image-video-container`} style={{width: size.width, height: size.height}}>
+            {!items[counter]?.isVideo && <img src={items[counter]?.src} onLoad={() => imageLoad()} width={size.width} height={size.height} alt={"alt"}/>}
+            {items[counter]?.isVideo && <video height={size.height} width={size.width} autoPlay muted onLoadStart={() => videoLoad()} onEnded={() => videoEnded()} src={items[counter]?.src}/>}
         </div>)
 }

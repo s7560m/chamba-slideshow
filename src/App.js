@@ -9,6 +9,7 @@ import {ThemeProvider} from "@emotion/react";
 import {useEffect, useState} from "react";
 import Authorization from "./routes/Authorization";
 import {getPassword} from "./api/firebase";
+import Tutorial from "./routes/Tutorial";
 
 const materialUITheme = createTheme({
     palette: {
@@ -60,6 +61,7 @@ function App() {
               <Route path="/admin" element=
                   {getAdminOrAuthorization()}
               />
+                <Route path="/tutorial" element={<Tutorial/>}/>
             </Routes>
           </BrowserRouter>
         </ThemeProvider>

@@ -11,10 +11,11 @@ export default function Navigation({show}) {
         <>
             <AppBar component="nav" color="primary">
                 <Toolbar>
-                    <img height="100px"
+                    <img className="home-image" onClick={() => window.location.href="https://chamba.ca"} height="100px"
                          src="https://923181.smushcdn.com/2283927/wp-content/uploads/2021/02/Chamba_logo_feb16.png?lossy=1&strip=1&webp=1"/>
                     <Button className="nav-button" color="secondary" onClick={() => navigate("/")}>Home</Button>
                     <Button className="nav-button" color="secondary" onClick={() => navigate("/admin")}>Admin</Button>
+                    <Button className="nav-button" color="secondary" onClick={() => navigate("/tutorial")}>Tutorial</Button>
                 </Toolbar>
             </AppBar>
         </>)
